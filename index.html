@@ -81,13 +81,13 @@
             fetch('/ultimo-arquivo')
                 .then(response => response.text())
                 .then(audioPath => {
-                    document.getElementById('ultimo-arquivo').innerText = `Último arquivo de áudio: ${audioPath}`;
+                    document.getElementById('ultimo-arquivo').innerText = `Last audio file: ${audioPath}`;
                     const audioDownloadLink = document.getElementById('audio-download-link');
                     audioDownloadLink.href = audioPath;
-                    audioDownloadLink.download = 'ultimo-arquivo.mp3'; // Nome do arquivo de download
+                    audioDownloadLink.download = 'ultimo-arquivo.mp3'; 
                 })
                 .catch(error => {
-                    console.error('Erro ao obter o último arquivo de áudio:', error);
+                    console.error('Error getting last audio file:', error);
                 });
         }
 
