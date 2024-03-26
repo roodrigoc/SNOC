@@ -49,8 +49,9 @@ The `devices.conf` file is used to configure the devices that will be monitored 
 
 Example:
 
-`ping-test|192.168.100.20|icmp|E`
-`Google|https://www.google.com/|web|NE`
+ping-test|192.168.100.20|icmp|E
+
+Google|https://www.google.com/|web|NE
 
 
 ### access.log
