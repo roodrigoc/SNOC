@@ -210,7 +210,7 @@ async function updateDeviceStatus(ws, devices) {
     }
 }
 
-const pastaCompartilhada = '\\\\192.168.1.100\\tmp'; 
+const pastaCompartilhada = '\\\\192.168.100.50\\tmp'; 
 
 app.get('/ultimo-arquivo', (req, res) => {
 
