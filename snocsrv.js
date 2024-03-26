@@ -161,7 +161,7 @@ function logConnection(ip) {
     const brazilTime = new Date(currentTime.getTime() - (3 * 60 * 60 * 1000)); 
     const brazilTimeFormatted = brazilTime.toISOString().replace('Z', ''); 
 
-    const logMessage = `[${brazilTimeFormatted}] Conexão de ${ip}\n`;
+    const logMessage = `[${brazilTimeFormatted}] Connection from ${ip}\n`;
     fs.appendFile('access.log', logMessage, (err) => {
         if (err) {
             console.error('Error registering connection:', err);
