@@ -63,6 +63,7 @@ The `access.log` file records information about connections made to the SNOC ser
 Example:
 
 [2024-02-22T17:28:09.797] Connection from 192.168.100.5
+
 [2024-03-25T23:01:56.613] Connection from 192.168.100.10
 
 ## Getting Started
