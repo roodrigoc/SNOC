@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<script type="text/plain">
+    /* Copyright (C) 2024 Rodrigo Costa (roodrigoc@hotmail.com)
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the
+    Free Software Foundation; either version 3, or (at your option) any
+    later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; see the file COPYING. If not, see
+    <http://www.gnu.org/licenses/>.  */
+</script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Network Operation Center (SNOC)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 80px;
+            height: 80px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .header h1 {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 20px;
+        }
+        .devices-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); 
+            gap: 10px; 
+        }
+        .device {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #C8E6C9; 
+        }
+        .device.offline {
+            background-color: #FFCDD2; 
+        }
+		
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo01.png" alt="Logo 01">
+        <h1>Simple Network Operation Center (SNOC)</h1>
+        <img src="logo02.png" alt="Logo 02">
+    </div>
+    
+    <div id="devices" class="devices-grid"></div>
+	
+	<div id="audio-info">
+        <p id="ultimo-arquivo"></p>
+		
+    </div>
+
+
+    <script>
+	// Enter the server IP here:    
+        const ws = new WebSocket('ws://192.168.100.1:3000');
+
+        ws.onmessage = function(event) {
+            const devices = JSON.parse(event.data);
+            const devicesDiv = document.getElementById('devices');
+            devicesDiv.innerHTML = '';
+
+            devices.forEach(device => {
+                const deviceDiv = document.createElement('div');
+                deviceDiv.className = `device ${device.status === 'offline' ? 'offline' : ''}`;
+                deviceDiv.innerHTML = `
+                    <h2>${device.device}</h2>
+                    <p>IP, Host ou Domínio: ${device.address}</p>
+                    <p>Status: ${device.status.toUpperCase()}</p>
+                    <p>Tempo ${device.status === 'online' ? 'ativo' : 'inativo'}: ${device.time}</p>
+                `;
+                devicesDiv.appendChild(deviceDiv);
+            });
+
+        };
+		
+		function atualizarUltimoArquivo() {
+            fetch('/ultimo-arquivo')
+                .then(response => response.text())
+                .then(audioPath => {
+                    document.getElementById('ultimo-arquivo').style.fontSize = '40px'; 
+					document.getElementById('ultimo-arquivo').innerText = `Last audio file: ${audioPath}`;
+                })
+                .catch(error => {
+                    console.error('Error getting last audio file:', error);
+                });
+        }
+
+        
+        setInterval(atualizarUltimoArquivo, 15000);
+
+        
+        atualizarUltimoArquivo();
+		
+    </script>
+</body>
+</html>
