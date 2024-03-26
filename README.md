@@ -8,7 +8,7 @@ SNOC is a Node.js application designed for basic network monitoring and manageme
 
 The server-side of the application, implemented in Node.js with Express.js and WebSocket, serves as the backbone for data processing and communication with clients. Key components include:
 
-### SNOC Server (nocsrv.js):
+### SNOC Server (snocsrv.js):
 - Utilizes Express.js for serving static files and handling API endpoints.
 - Implements WebSocket for establishing a real-time connection with clients.
 - Monitors device status by periodically sending ping or GET requests to specified devices.
@@ -16,7 +16,7 @@ The server-side of the application, implemented in Node.js with Express.js and W
 - Logs connection information to a file with adjusted GMT-3 timezone.
 - Provides functionality for monitoring shared network folders and retrieving information about the latest WAV file.
 
-### Configuration File (noc.conf):
+### Configuration File (snoc.conf):
 - Contains SMTP and email configuration for sending email alerts.
 
 ## Client-Side Components
