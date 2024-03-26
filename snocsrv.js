@@ -42,7 +42,7 @@ const accumulatedStatusTimes = {};
 
 function readDevices() {
     const devices = [];
-    const data = fs.readFileSync('devices.txt', 'utf8');
+    const data = fs.readFileSync('devices.conf', 'utf8');
     const lines = data.split('\n');
     lines.forEach(line => {
         const [device, address, protocol, permission] = line.trim().split('|');
