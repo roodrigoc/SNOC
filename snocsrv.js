@@ -41,7 +41,7 @@ const transporter = nodemailer.createTransport({
     secure: false, 
     auth: {
         user: config['smtp-user'],
-        pass: 'xyzabcdefghijklm' 
+        pass: config['smtp-password'] 
     },
     tls: {
         rejectUnauthorized: true 
