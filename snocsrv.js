@@ -79,7 +79,7 @@ async function checkDeviceStatus(devices) {
             } else if (protocol.toLowerCase() === 'web') {
                 res = await axios.get(address);
             } else {
-                throw new Error(`Protocolo ou Serviço ${protocol} não suportado`);
+                throw new Error(`Protocol or Service ${protocol} not supported`);
             }
 
             const currentTime = new Date();
@@ -109,7 +109,7 @@ async function checkDeviceStatus(devices) {
             return { device, address, isOnline: res.alive || (res.status === 200 && protocol.toLowerCase() === 'web') };
 			
         } catch (error) {
-            console.error(`Erro ao verificar o dispositivo ${device} (${address}): ${error.message}`);
+            console.error(`Error checking device ${device} (${address}): ${error.message}`);
             const currentTime = new Date();
             const accumulatedTime = accumulatedStatusTimes[address];
             if (accumulatedTime.lastStatus === 'online') {
@@ -138,20 +138,20 @@ function formatTime(milliseconds) {
 }
 
 function sendEmail(device, address, status) {
-    const subject = `Alerta! Dispositivo "${device}" está ${status}`;
+    const subject = `Alert! Device "${device}" is ${status}`;
     const currentTime = new Date().toLocaleString();
-    const content = `Data/Horário da ocorrência: ${currentTime}\nEndereço do dispositivo: ${address}`;
+    const content = `Date/Time: ${currentTime}\nDevice Address: ${address}`;
     const mailOptions = {
         from: config['smtp-user'],
-        to: config['email-destino'],
+        to: config['email-destination'],
         subject: subject,
         text: content
     };
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error('Erro ao enviar e-mail:', error);
+            console.error('Error sending email:', error);
         } else {
-            console.log('E-mail enviado:', info.response);
+            console.log('Email sent:', info.response);
         }
     });
 }
@@ -164,7 +164,7 @@ function logConnection(ip) {
     const logMessage = `[${brazilTimeFormatted}] Conexão de ${ip}\n`;
     fs.appendFile('access.log', logMessage, (err) => {
         if (err) {
-            console.error('Erro ao registrar a conexão:', err);
+            console.error('Error registering connection:', err);
         }
     });
 }
@@ -175,7 +175,7 @@ app.get('/', (req, res) => {
 
 wss.on('connection', (ws, req) => {
     const ip = req.connection.remoteAddress;
-    console.log('Cliente conectado do IP:', ip);
+    console.log('Client connected from IP:', ip);
 
     logConnection(ip);
 
@@ -187,7 +187,7 @@ wss.on('connection', (ws, req) => {
     }, 5000);
 
     ws.on('close', () => {
-        console.log('Cliente desconectado');
+        console.log('Client disconnected');
         clearInterval(interval);
     });
 });
@@ -206,7 +206,7 @@ async function updateDeviceStatus(ws, devices) {
         });
         ws.send(JSON.stringify(statusWithAccumulatedTime));
     } catch (error) {
-        console.error('Erro ao atualizar status dos dispositivos:', error.message);
+        console.error('Error updating device statuses:', error.message);
     }
 }
 
@@ -218,14 +218,14 @@ app.get('/ultimo-arquivo', (req, res) => {
 
     fs.readdir(pastaAtual, (err, files) => {
         if (err) {
-            res.send(`A pasta (${pastaAtual}) não existe.`);
+            res.send(`The folder (${pastaAtual}) don't exist.`);
         } else {
             if (files.length === 0) {
-                res.send(`A pasta (${pastaAtual}) está vazia.`);
+                res.send(`The folder (${pastaAtual}) is empty.`);
             } else {
                 files = files.filter(file => file.endsWith('.WAV')); 
                 if (files.length === 0) {
-                    res.send(`A pasta  (${pastaAtual}) não contém arquivos de áudio.`);
+                    res.send(`The folder (${pastaAtual}) don't contain audio files.`);
                 } else {
                     files.sort((a, b) => {
                         const statA = fs.statSync(path.join(pastaAtual, a));
@@ -244,5 +244,5 @@ app.get('/ultimo-arquivo', (req, res) => {
 
 
 server.listen(3000, () => {
-    console.log('Servidor iniciado em http://localhost:3000');
+    console.log('Server started at: http://localhost:3000');
 });
