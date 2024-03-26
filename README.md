@@ -47,4 +47,8 @@ To run the application locally, follow these steps:
 4. Start the server using `node snocsrv.js`.
 5. Access the web interface via `http://localhost:3000` in your browser.
 
-Feel free to explore and contribute to this project! If you encounter any issues or have suggestions, please open an issue on GitHub.
+## Reporting Bugs
+If you encounter problems with SNOC, please file a github issue. 
+
+## License
+SNOC is licensed under the GPLv3+.
