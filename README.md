@@ -40,7 +40,7 @@ In addition to the previously mentioned files, the project also includes the fol
 
 The `devices.conf` file is used to configure the devices that will be monitored by SNOC. Each line represents a device and follows the syntax:
 
-<Device Name>|<IP Address or URL>|<Protocol>|<Permission>
+`<Device Name>|<IP Address or URL>|<Protocol>|<Permission>`
 
 - `<Device Name>`: Identifying name of the device.
 - `<IP Address or URL>`: IP address or URL of the device.
