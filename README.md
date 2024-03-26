@@ -26,7 +26,7 @@ The client-side of the application, presented through a web interface served by 
 ### HTML Interface (index.html):
 - Displays a header with the SNOC logo and title.
 - Shows a grid layout of monitored devices with their status and active/inactive time.
-- Includes functionality to display and download the latest audio file from a shared folder.
+- Includes functionality to display the latest audio file from a shared folder.
 - Updates device status and audio information in real-time using WebSocket communication.
 
 ### Styling (CSS):
