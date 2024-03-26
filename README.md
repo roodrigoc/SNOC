@@ -8,7 +8,7 @@ SNOC is a Node.js application designed for basic network monitoring and manageme
 
 The server-side of the application, implemented in Node.js with Express.js and WebSocket, serves as the backbone for data processing and communication with clients. Key components include:
 
-### SNOC Server (nocsrv.js):
+### SNOC Server (snocsrv.js):
 - Utilizes Express.js for serving static files and handling API endpoints.
 - Implements WebSocket for establishing a real-time connection with clients.
 - Monitors device status by periodically sending ping or GET requests to specified devices.
@@ -16,7 +16,7 @@ The server-side of the application, implemented in Node.js with Express.js and W
 - Logs connection information to a file with adjusted GMT-3 timezone.
 - Provides functionality for monitoring shared network folders and retrieving information about the latest WAV file.
 
-### Configuration File (noc.conf):
+### Configuration File (snoc.conf):
 - Contains SMTP and email configuration for sending email alerts.
 
 ## Client-Side Components
@@ -26,8 +26,6 @@ The client-side of the application, presented through a web interface served by 
 ### HTML Interface (index.html):
 - Displays a header with the SNOC logo and title.
 - Shows a grid layout of monitored devices with their status and active/inactive time.
-- Includes functionality to display and download the latest audio file from a shared folder.
-- Updates device status and audio information in real-time using WebSocket communication.
 
 ### Styling (CSS):
 - Provides styling for the HTML interface, distinguishing between online and offline devices.
@@ -37,7 +35,6 @@ The client-side of the application, presented through a web interface served by 
 In addition to basic network monitoring functionalities, SNOC includes:
 
 - Email Alerts: Sends email alerts to configured addresses when a device status changes.
-- Audio Alerts: Capable of playing an audio alert when one or more devices go offline (commented out in the code).
 - Shared Network Folder Monitoring: Allows monitoring of shared network folders and retrieval of the latest WAV file within a specified directory.
 
 ## Getting Started
@@ -46,8 +43,8 @@ To run the application locally, follow these steps:
 
 1. Ensure Node.js is installed on your system.
 2. Install dependencies using `npm install`.
-3. Configure the SMTP and email settings in `noc.conf`.
-4. Start the server using `node nocsrv.js`.
+3. Configure the SMTP and email settings in `snoc.conf`.
+4. Start the server using `node snocsrv.js`.
 5. Access the web interface via `http://localhost:3000` in your browser.
 
 Feel free to explore and contribute to this project! If you encounter any issues or have suggestions, please open an issue on GitHub.
