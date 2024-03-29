@@ -15,7 +15,7 @@ along with this program; see the file COPYING. If not, see
 <http://www.gnu.org/licenses/>.  */
 
 //Enter the sharing path with audio files here
-const pastaCompartilhada = '\\\\192.168.21.12\\tmp'; 
+const pastaCompartilhada = '\\\\192.168.100.50\\tmp'; 
 
 app.get('/ultimo-arquivo', (req, res) => {
 
