@@ -71,48 +71,8 @@
 		
     </div>
 
+	<script src="devices.js"></script>
 
-    <script>
-	// Enter the server IP here:    
-        const ws = new WebSocket('ws://192.168.100.1:3000');
-
-        ws.onmessage = function(event) {
-            const devices = JSON.parse(event.data);
-            const devicesDiv = document.getElementById('devices');
-            devicesDiv.innerHTML = '';
-
-            devices.forEach(device => {
-                const deviceDiv = document.createElement('div');
-                deviceDiv.className = `device ${device.status === 'offline' ? 'offline' : ''}`;
-                deviceDiv.innerHTML = `
-                    <h2>${device.device}</h2>
-                    <p>IP, Host ou Domínio: ${device.address}</p>
-                    <p>Status: ${device.status.toUpperCase()}</p>
-                    <p>Tempo ${device.status === 'online' ? 'ativo' : 'inativo'}: ${device.time}</p>
-                `;
-                devicesDiv.appendChild(deviceDiv);
-            });
-
-        };
-		
-		function atualizarUltimoArquivo() {
-            fetch('/ultimo-arquivo')
-                .then(response => response.text())
-                .then(audioPath => {
-                    document.getElementById('ultimo-arquivo').style.fontSize = '40px'; 
-					document.getElementById('ultimo-arquivo').innerText = `Last audio file: ${audioPath}`;
-                })
-                .catch(error => {
-                    console.error('Error getting last audio file:', error);
-                });
-        }
-
-        
-        setInterval(atualizarUltimoArquivo, 15000);
-
-        
-        atualizarUltimoArquivo();
-		
-    </script>
+    
 </body>
 </html>
