@@ -223,7 +223,10 @@ app.get('/ultimo-arquivo', (req, res) => {
             if (files.length === 0) {
                 res.send(`The folder (${pastaAtual}) is empty.`);
             } else {
-                files = files.filter(file => file.endsWith('.WAV')); 
+                files = files.filter(file => {
+			const lowercaseFile = file.toLowerCase();
+			return lowercaseFile.endsWith('.wav') || lowercaseFile.endsWith('.mp3');
+		});
                 if (files.length === 0) {
                     res.send(`The folder (${pastaAtual}) don't contain audio files.`);
                 } else {
