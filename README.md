@@ -1,3 +1,6 @@
+
+![snoc](https://github.com/roodrigoc/SNOC/assets/52783418/a6d50334-e521-4b06-8a64-5bb7e3bc716c)
+
 # Simple Network Operation Center (SNOC)
 
 ## Project Description
