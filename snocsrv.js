@@ -249,6 +249,11 @@ app.get('/ultimo-arquivo', (req, res) => {
     });
 });
 
+const caminhoDevicesJS = path.join(__dirname, 'devices.js');
+
+app.get('/devices.js', (req, res) => {
+    res.sendFile(caminhoDevicesJS);
+});
 
 server.listen(3000, () => {
     console.log('Server started at: http://localhost:3000');
