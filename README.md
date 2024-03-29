@@ -76,8 +76,9 @@ To run the application locally, follow these steps:
 - npm install axios child_process express fs nodemailer path ping ws
 
 3. Configure the SMTP and email settings in `snoc.conf`.
-4. Start the server using `node snocsrv.js`.
-5. Access the web interface via `http://localhost:3000` in your browser.
+4. Enter the server IP address in the `devices.js` file.
+5. Start the server using `node snocsrv.js`.
+6. Access the web interface via `http://localhost:3000` in your browser.
 
 ## Reporting Bugs
 If you encounter problems with SNOC, please file a github issue.
