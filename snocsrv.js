@@ -79,9 +79,11 @@ async function checkDeviceStatus(devices) {
         try {
             let res;
             if (protocol.toLowerCase() === 'icmp') {
-				res = await ping.promise.probe(address, { timeout: 2, min_reply: 2 });
+		//res = await ping.promise.probe(address, { min_reply: 1, interval: 10000 });
+		res = await ping.promise.probe(address, { timeout: 2, min_reply: 2 });
             } else if (protocol.toLowerCase() === 'web') {
-                res = await axios.get(address);
+                //res = await axios.get(address, { timeout: 10000 });
+		res = await axios.get(address);
             } else {
                 throw new Error(`Protocol or Service ${protocol} not supported`);
             }
@@ -188,6 +190,7 @@ wss.on('connection', (ws, req) => {
 
     const interval = setInterval(() => {
         updateDeviceStatus(ws, devices);
+    //}, 10000);
     }, 5000);
 
     ws.on('close', () => {
