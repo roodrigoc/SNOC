@@ -30,8 +30,10 @@ const wss = new WebSocket.Server({ server });
 const configData = fs.readFileSync('snoc.conf', 'utf8');
 const config = {};
 configData.split('\n').forEach(line => {
-    const [key, value] = line.split('=');
-    config[key.trim()] = value.trim();
+	if (line.trim() && !line.trim().startsWith('#')) {
+    		const [key, value] = line.split('=');
+    		config[key.trim()] = value.trim();
+	}
 });
 
 
@@ -61,10 +63,12 @@ function readDevices() {
     const data = fs.readFileSync('devices.conf', 'utf8');
     const lines = data.split('\n');
     lines.forEach(line => {
-        const [device, address, protocol, permission] = line.trim().split('|');
-        devices.push({ device, address, protocol, permission });
+	if (line.trim() && !line.trim().startsWith('#')) { 
+        	const [device, address, protocol, permission] = line.trim().split('|');
+        	devices.push({ device, address, protocol, permission });
         
-        accumulatedStatusTimes[address] = { online: 0, offline: 0 };
+        	accumulatedStatusTimes[address] = { online: 0, offline: 0 };
+	}
     });
     return devices;
 }
