@@ -2,7 +2,7 @@
 
 ## Project Description
 
-SNOC is a Node.js application designed for basic network monitoring and management tasks. It provides functionalities for monitoring device status via ping or HTTP GET requests, as well as monitoring shared network folders and retrieving information about the latest WAV file in a specified directory. The project includes both server-side and client-side components for real-time monitoring and alerting.
+SNOC is a Node.js application designed for basic network monitoring and management tasks. It provides functionalities for monitoring device status via ping or HTTP GET requests, as well as monitoring shared network folders and retrieving information about the latest WAV or MP3 file in a specified directory. The project includes both server-side and client-side components for real-time monitoring and alerting.
 
 ## Server-Side Components
 
@@ -14,7 +14,7 @@ The server-side of the application, implemented in Node.js with Express.js and W
 - Monitors device status by periodically sending ping or GET requests to specified devices.
 - Sends email alerts when device status changes (online to offline or vice versa).
 - Logs connection information to a file with adjusted GMT-3 timezone.
-- Provides functionality for monitoring shared network folders and retrieving information about the latest WAV file.
+- Provides functionality for monitoring shared network folders and retrieving information about the latest WAV or MP3 file.
 
 ### Configuration File (snoc.conf):
 - Contains SMTP and email configuration for sending email alerts.
