@@ -40,8 +40,8 @@ along with this program; see the file COPYING. If not, see
             fetch('/ultimo-arquivo')
                 .then(response => response.text())
                 .then(audioPath => {
-                    document.getElementById('ultimo-arquivo').style.fontSize = '40px'; 
-					document.getElementById('ultimo-arquivo').innerText = `Last audio file: ${audioPath}`;
+                	document.getElementById('ultimo-arquivo').style.fontSize = '40px'; 
+			document.getElementById('ultimo-arquivo').innerText = `Last audio file: ${audioPath}`;
                 })
                 .catch(error => {
                     console.error('Error getting last audio file:', error);
