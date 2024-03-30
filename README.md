@@ -88,7 +88,7 @@ To run the application locally, follow these steps:
 ### Advanced features
 
 - Creation of email groups to allow device alert emails to be directed to specific groups.
-- Hide some devices from viewing on the home page.
+~~- Hide some devices from viewing on the home page.~~
 
 ## Reporting Bugs
 If you encounter problems with SNOC, please file a github issue.
