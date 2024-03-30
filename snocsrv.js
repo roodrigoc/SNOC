@@ -64,9 +64,8 @@ function readDevices() {
     const lines = data.split('\n');
     lines.forEach(line => {
 	if (line.trim() && !line.trim().startsWith('#')) { 
-        	const [device, address, protocol, permission] = line.trim().split('|');
-        	devices.push({ device, address, protocol, permission });
-        
+        	const [device, address, protocol, permission, visibility] = line.trim().split('|');
+            	devices.push({ device, address, protocol, permission, visibility });
         	accumulatedStatusTimes[address] = { online: 0, offline: 0 };
 	}
     });
@@ -211,7 +210,8 @@ async function updateDeviceStatus(ws, devices) {
                 time: isOnline ? formatTime(accumulatedTime.online) : formatTime(accumulatedTime.offline)
             };
         });
-        ws.send(JSON.stringify(statusWithAccumulatedTime));
+        const visibleDevices = statusWithAccumulatedTime.filter(device => devices.find(d => d.device === device.device && d.visibility === 'show'));
+        ws.send(JSON.stringify(visibleDevices));
     } catch (error) {
         console.error('Error updating device statuses:', error.message);
     }
