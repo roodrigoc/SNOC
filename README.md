@@ -32,7 +32,7 @@ The client-side of the application, presented through a web interface served by 
 - Includes functionality to display the latest audio file from a shared folder.
 - Updates device status and audio information in real-time using WebSocket communication.
 
-### Styling (CSS):
+### Styling (main.css):
 - Provides styling for the HTML interface, distinguishing between online and offline devices.
 
 ## Additional Files
