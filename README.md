@@ -43,18 +43,21 @@ In addition to the previously mentioned files, the project also includes the fol
 
 The `devices.conf` file is used to configure the devices that will be monitored by SNOC. Each line represents a device and follows the syntax:
 
-`<Device Name>|<IP Address or URL>|<Protocol>|<Permission>`
+`<Device Name>|<IP Address or URL>|<Protocol>|<Permission>|<Visibility>`
 
 - `<Device Name>`: Identifying name of the device.
 - `<IP Address or URL>`: IP address or URL of the device.
 - `<Protocol>`: Protocol to be used to check the device status (icmp for ping or web for HTTP GET).
 - `<Permission>`: Permission to receive email alerts (E to send email alerts, NE to not send).
+- `<Visibility>`: Hide some devices from viewing on the home page. (show to see on home page, hide to conceal).
 
 Example:
 
-ping-test|192.168.100.20|icmp|E
+ping-test|192.168.100.20|icmp|E|show
 
-Google|https://www.google.com/|web|NE
+cam01|192.168.100.21|icmp|E|hide
+
+Google|https://www.google.com/|web|NE|show
 
 
 ### access.log
