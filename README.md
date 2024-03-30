@@ -59,6 +59,9 @@ cam01|192.168.100.21|icmp|E|hide
 
 Google|https://www.google.com/|web|NE|show
 
+WEB Server|http://192.168.100.12/|web|E|show
+
+
 
 ### access.log
 
