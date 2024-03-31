@@ -67,14 +67,30 @@ const accumulatedStatusTimes = {};
 
 function readDevices() {
     const devices = [];
+    const configData = fs.readFileSync('snoc.conf', 'utf8');
+    const config = {};
+    configData.split('\n').forEach(line => {
+        if (line.trim() && !line.trim().startsWith('#')) {
+            const [key, value] = line.split('=');
+            config[key.trim()] = value.trim();
+        }
+    });
+
+    const groups = Object.keys(config).filter(key => key !== 'smtp-host' && key !== 'smtp-port' && key !== 'smtp-secure' && key !== 'smtp-user' && key !== 'smtp-password');
+    console.log('Groups:', groups);
+
     const data = fs.readFileSync('devices.conf', 'utf8');
     const lines = data.split('\n');
     lines.forEach(line => {
-	if (line.trim() && !line.trim().startsWith('#')) { 
-        	const [device, address, protocol, permission, visibility] = line.trim().split('|');
-            	devices.push({ device, address, protocol, permission, visibility });
-        	accumulatedStatusTimes[address] = { online: 0, offline: 0 };
-	}
+        if (line.trim() && !line.trim().startsWith('#')) {
+            const [device, address, protocol, permission, visibility] = line.trim().split('|');
+            if (permission !== 'NE' && !groups.includes(permission)) {
+                console.error(`Error: Permission group "${permission}" does not exist in snoc.conf`);
+                return;
+            }
+            devices.push({ device, address, protocol, permission, visibility });
+            accumulatedStatusTimes[address] = { online: 0, offline: 0 };
+        }
     });
     return devices;
 }
