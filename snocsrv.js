@@ -29,11 +29,18 @@ const wss = new WebSocket.Server({ server });
 
 const configData = fs.readFileSync('snoc.conf', 'utf8');
 const config = {};
+const emailGroups = {};
 configData.split('\n').forEach(line => {
-	if (line.trim() && !line.trim().startsWith('#')) {
-    		const [key, value] = line.split('=');
-    		config[key.trim()] = value.trim();
-	}
+    if (line.trim() && !line.trim().startsWith('#')) {
+        const [key, value] = line.split('=');
+        if (key.trim().startsWith('E')) {
+            const groupName = key.trim();
+            const emails = value.trim().split(';');
+            emailGroups[groupName] = emails;
+        } else {
+            config[key.trim()] = value.trim();
+        }
+    }
 });
 
 
@@ -92,9 +99,8 @@ async function checkDeviceStatus(devices) {
             if ((res.status === 200 && protocol.toLowerCase() === 'web') || res.alive) {
                 if (accumulatedTime.lastStatus === 'offline') {
                     accumulatedTime.offline = 0;
-                    if (permission === 'E') {
-                        sendEmail(device, address, 'online');
-                    }
+                    sendEmail(device, address, 'online', permission);
+
                 }
                 accumulatedTime.online += (currentTime - (accumulatedTime.lastUpdateTime || currentTime));
                 accumulatedTime.lastUpdateTime = currentTime;
@@ -103,9 +109,8 @@ async function checkDeviceStatus(devices) {
                 if (accumulatedTime.lastStatus === 'online') {
                     accumulatedTime.online = 0;
                     accumulatedTime.lastOfflineTime = currentTime;
-                    if (permission === 'E') {
-                        sendEmail(device, address, 'offline');
-                    }
+                    sendEmail(device, address, 'offline', permission);
+
                 }
                 accumulatedTime.offline += (currentTime - (accumulatedTime.lastUpdateTime || currentTime));
                 accumulatedTime.lastUpdateTime = currentTime;
@@ -120,9 +125,8 @@ async function checkDeviceStatus(devices) {
             if (accumulatedTime.lastStatus === 'online') {
                 accumulatedTime.online = 0;
                 accumulatedTime.lastOfflineTime = currentTime;
-                if (permission === 'E') {
-                    sendEmail(device, address, 'offline');
-                }
+                sendEmail(device, address, 'offline', permission);
+
             }
             accumulatedTime.offline += (currentTime - (accumulatedTime.lastUpdateTime || currentTime));
             accumulatedTime.lastUpdateTime = currentTime;
@@ -142,13 +146,13 @@ function formatTime(milliseconds) {
     return `${hours}h ${remainingMinutes}m ${remainingSeconds}s`;
 }
 
-function sendEmail(device, address, status) {
+function sendEmailToGroup(groupName, device, address, status) {
     const subject = `Alert! Device "${device}" is ${status}`;
     const currentTime = new Date().toLocaleString();
     const content = `Date/Time: ${currentTime}\nDevice Address: ${address}`;
     const mailOptions = {
         from: config['smtp-user'],
-        to: config['email-destination'],
+        to: emailGroups[groupName].join(';'),
         subject: subject,
         text: content
     };
@@ -159,6 +163,13 @@ function sendEmail(device, address, status) {
             console.log('Email sent:', info.response);
         }
     });
+}
+
+function sendEmail(device, address, status, permission) {
+    if (permission.startsWith('E')) {
+        const groupName = permission;
+        sendEmailToGroup(groupName, device, address, status);
+    }
 }
 
 function logConnection(ip) {
