@@ -49,17 +49,19 @@ The `devices.conf` file is used to configure the devices that will be monitored 
 - `<IP Address or URL>`: IP address or URL of the device.
 - `<Protocol>`: Protocol to be used to check the device status (icmp for ping or web for HTTP GET).
 - `<Permission>`: Permission to receive email alerts (E to send email alerts, NE to not send).
-- `<Visibility>`: Hide some devices from viewing on the home page. (show to see on home page, hide to conceal).
+- `<Visibility>`: Show or hide the device on the home page.
+
+#### Email Groups: SNOC supports email groups. Use the permission field to specify which group a device belongs to. For example, devices with permission E1 will send email alerts to the recipients listed in the E1 group in `snoc.conf`.
 
 Example:
 
-ping-test|192.168.100.20|icmp|E|show
+ping-test|192.168.100.20|icmp|E1|show
 
-cam01|192.168.100.21|icmp|E|hide
+cam01|192.168.100.21|icmp|E3|hide
 
 Google|https://www.google.com/|web|NE|show
 
-WEB Server|http://192.168.100.12/|web|E|show
+WEB Server|http://192.168.100.12/|web|E2|show
 
 
 
@@ -93,9 +95,12 @@ To run the application locally, follow these steps:
 
 ### Advanced features
 
-- Creation of email groups to allow device alert emails to be directed to specific groups.
+~~ - Creation of email groups to allow device alert emails to be directed to specific groups.~~
 
-~~- Hide some devices from viewing on the home page.~~
+~~ - Hide some devices from viewing on the home page.~~
+
+- Basic monitoring with SNMP.
+
 
 ## Reporting Bugs
 If you encounter problems with SNOC, please file a github issue.
