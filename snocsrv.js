@@ -47,7 +47,7 @@ configData.split('\n').forEach(line => {
 const transporter = nodemailer.createTransport({
     host: config['smtp-host'],
     port: parseInt(config['smtp-port']),
-    secure: false, 
+    secure: parseInt(config['smtp-secure']), 
     auth: {
         user: config['smtp-user'],
         pass: config['smtp-password'] 
