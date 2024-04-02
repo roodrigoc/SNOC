@@ -22,12 +22,21 @@ const axios = require('axios');
 const { exec } = require('child_process');
 const nodemailer = require('nodemailer');
 const path = require('path');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const server = require('http').createServer(app);
 const wss = new WebSocket.Server({ server });
 
 const auth = require('basic-auth');
+
+//Rate limiting prevents the same IP address from making too many requests that will help us prevent attacks like brute force
+const limiter = rateLimit({
+	windowMs: 60 * 60 * 1000,
+	max: 2000, 
+	message: "You have reached the request limit, please try again in 1 hour."
+	
+});
 
 function basicAuth(req, res, next) {
     const credentials = auth(req);
@@ -86,7 +95,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-
+app.use(limiter);
 app.use(basicAuth);
 app.use(express.static('public'));
 
