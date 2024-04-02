@@ -226,7 +226,7 @@ function sendEmail(device, address, status, permission) {
     }
 }
 
-function logConnection(ip) {
+function logConnection(ip, username) {
     const currentTime = new Date();
     const brazilTime = new Date(currentTime.getTime() - (3 * 60 * 60 * 1000)); 
     const brazilTimeFormatted = brazilTime.toISOString().replace('Z', ''); 
@@ -249,8 +249,6 @@ wss.on('connection', (ws, req) => {
     const credentials = auth(req);
     const username = credentials ? credentials.name.toLowerCase() : 'unknown';
 	
-    console.log('Client connected from IP:', ip);
-
     logConnection(ip, username);
 
     const devices = readDevices();
