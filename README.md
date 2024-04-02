@@ -99,6 +99,8 @@ To run the application locally, follow these steps:
 
 ~~- Hide some devices from viewing on the home page.~~
 
+~~- Basic authentication~~
+
 - Basic monitoring with SNMP.
 
 
