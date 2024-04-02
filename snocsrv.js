@@ -27,6 +27,35 @@ const app = express();
 const server = require('http').createServer(app);
 const wss = new WebSocket.Server({ server });
 
+const auth = require('basic-auth');
+
+function basicAuth(req, res, next) {
+    const credentials = auth(req);
+
+    if (!credentials || !credentials.name) {
+        res.statusCode = 401;
+        res.setHeader('WWW-Authenticate', 'Basic realm="SNOC"');
+        res.end('Access denied.');
+        return;
+    }
+
+    const usersData = fs.readFileSync('users.conf', 'utf8').split('\n');
+    const validUsers = usersData.map(line => {
+        const [username, password] = line.trim().split(':');
+        return { username, password };
+    });
+
+    const isValidUser = validUsers.some(user => user.username === credentials.name && user.password === credentials.pass);
+
+    if (!isValidUser) {
+        res.statusCode = 401;
+        res.setHeader('WWW-Authenticate', 'Basic realm="SNOC"');
+        res.end('Access denied.');
+    } else {
+        next();
+    }
+}
+
 const configData = fs.readFileSync('snoc.conf', 'utf8');
 const config = {};
 const emailGroups = {};
@@ -58,7 +87,7 @@ const transporter = nodemailer.createTransport({
 });
 
 
-
+app.use(basicAuth);
 app.use(express.static('public'));
 
 
