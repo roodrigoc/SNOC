@@ -115,7 +115,7 @@ function readDevices() {
     });
 
     const groups = Object.keys(config).filter(key => key !== 'smtp-host' && key !== 'smtp-port' && key !== 'smtp-secure' && key !== 'smtp-user' && key !== 'smtp-password');
-    console.log('Groups:', groups);
+    console.log('Email Groups:', groups);
 
     const data = fs.readFileSync('devices.conf', 'utf8');
     const lines = data.split('\n');
