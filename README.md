@@ -69,7 +69,7 @@ WEB Server|http://192.168.100.12/|web|E2|show
 
 The `access.log` file records information about connections made to the SNOC server. It follows the standard log format and contains entries like:
 
-[Date and Time] Connection from <IP Address> (User: <username>)
+[Date and Time] Connection from "IP Address" (User: "username")
 
 Example:
 
