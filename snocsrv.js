@@ -127,7 +127,7 @@ function readDevices() {
                 return;
             }
             devices.push({ device, address, protocol, permission, visibility });
-            accumulatedStatusTimes[address] = { online: 0, offline: 0 };
+            accumulatedStatusTimes[address] = accumulatedStatusTimes[address] || { online: 0, offline: 0 };
         }
     });
     return devices;
