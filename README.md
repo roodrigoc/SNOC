@@ -77,6 +77,16 @@ Example:
 
 [2024-03-25T23:01:56.613] Connection from 192.168.100.10
 
+
+
+### users.conf
+
+The `users.conf` file is used to allow access via basic authentication. Each line represents a user and follows the syntax:
+
+username:password
+
+
+
 ## Getting Started
 
 To run the application locally, follow these steps:
