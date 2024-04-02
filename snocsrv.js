@@ -231,12 +231,13 @@ function logConnection(ip) {
     const brazilTime = new Date(currentTime.getTime() - (3 * 60 * 60 * 1000)); 
     const brazilTimeFormatted = brazilTime.toISOString().replace('Z', ''); 
 
-    const logMessage = `[${brazilTimeFormatted}] Connection from ${ip}\n`;
+    const logMessage = `[${brazilTimeFormatted}] Connection from ${ip} (User: ${username})\n`;
     fs.appendFile('access.log', logMessage, (err) => {
         if (err) {
             console.error('Error registering connection:', err);
         }
     });
+    console.log(`Connection from ${ip} (User: ${username})`);
 }
 
 app.get('/', (req, res) => {
@@ -245,9 +246,12 @@ app.get('/', (req, res) => {
 
 wss.on('connection', (ws, req) => {
     const ip = req.connection.remoteAddress;
+    const credentials = auth(req);
+    const username = credentials ? credentials.name.toLowerCase() : 'unknown';
+	
     console.log('Client connected from IP:', ip);
 
-    logConnection(ip);
+    logConnection(ip, username);
 
     const devices = readDevices();
     updateDeviceStatus(ws, devices);
