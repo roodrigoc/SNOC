@@ -101,17 +101,6 @@ To run the application locally, follow these steps:
 5. Start the server using `node snocsrv.js`.
 6. Access the web interface via `http://localhost:3000` in your browser.
 
-## Next Steps
-
-### Advanced features
-
-~~- Creation of email groups to allow device alert emails to be directed to specific groups.~~
-
-~~- Hide some devices from viewing on the home page.~~
-
-~~- Basic authentication~~
-
-- Basic monitoring with SNMP.
 
 
 ## Reporting Bugs
