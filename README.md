@@ -51,7 +51,7 @@ The `devices.conf` file is used to configure the devices that will be monitored 
 - `<Permission>`: Permission to receive email alerts (E to send email alerts, NE to not send).
 - `<Visibility>`: Show or hide the device on the home page.
 
-#### Email Groups: SNOC supports email groups. Use the permission field to specify which group a device belongs to. 
+#### Email Groups: SNOC supports email groups. Use the permission field to specify which group a device belongs to.
 #### For example, devices with permission E1 will send email alerts to the recipients listed in the E1 group in `snoc.conf`.
 
 Example:
