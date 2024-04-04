@@ -20,7 +20,7 @@ The server-side of the application, implemented in Node.js with Express.js and W
 - Provides functionality for monitoring shared network folders and retrieving information about the latest WAV or MP3 file.
 
 ### Configuration File (snoc.conf):
-- Contains SMTP and email configuration for sending email alerts.
+- Contains SMTP and email configuration for sending email alerts. The password must be encrypted with the BASE64 algorithm (https://www.base64encode.org/).
 
 ## Client-Side Components
 
@@ -51,7 +51,8 @@ The `devices.conf` file is used to configure the devices that will be monitored 
 - `<Permission>`: Permission to receive email alerts (E to send email alerts, NE to not send).
 - `<Visibility>`: Show or hide the device on the home page.
 
-#### Email Groups: SNOC supports email groups. Use the permission field to specify which group a device belongs to. For example, devices with permission E1 will send email alerts to the recipients listed in the E1 group in `snoc.conf`.
+#### Email Groups: SNOC supports email groups. Use the permission field to specify which group a device belongs to. 
+### For example, devices with permission E1 will send email alerts to the recipients listed in the E1 group in `snoc.conf`.
 
 Example:
 
@@ -81,7 +82,9 @@ Example:
 
 ### users.conf
 
-The `users.conf` file is used to allow access via basic authentication. Each line represents a user and follows the syntax:
+The `users.conf` file is used to allow access via basic authentication. The file must contain passwords encrypted with the BASE64 algorithm (https://www.base64encode.org/). Each line represents a user and
+follows the syntax:
+
 
 username:password
 
@@ -94,7 +97,7 @@ To run the application locally, follow these steps:
 1. Ensure Node.js is installed on your system.
 2. Install dependencies using `npm install`.
 
-- npm install axios child_process express fs nodemailer path ping ws basic-auth express-rate-limit
+- npm install axios child_process express fs nodemailer path ping ws basic-auth express-rate-limit base64-arraybuffer
 
 3. Configure the SMTP and email settings in `snoc.conf`.
 4. Enter the server IP address in the `devices.js` file.
