@@ -44,6 +44,7 @@ function basicAuth(req, res, next) {
     if (!credentials || !credentials.name) {
         res.statusCode = 401;
         res.setHeader('WWW-Authenticate', 'Basic realm="SNOC"');
+	res.setHeader('Cache-Control', 'no-store');
         res.end('Access denied.');
         return;
     }
@@ -59,6 +60,7 @@ function basicAuth(req, res, next) {
     if (!isValidUser) {
         res.statusCode = 401;
         res.setHeader('WWW-Authenticate', 'Basic realm="SNOC"');
+	res.setHeader('Cache-Control', 'no-store');
         res.end('Access denied.');
     } else {
         next();
