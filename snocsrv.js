@@ -52,9 +52,13 @@ function basicAuth(req, res, next) {
 
     const usersData = fs.readFileSync('users.conf', 'utf8').split('\n');
     const validUsers = usersData.map(line => {
-        const [username, password] = line.trim().split(':');
-        return { username, password: Buffer.from(password, 'base64').toString('utf-8') };
-    });
+        const trimmedLine = line.trim();
+        if (trimmedLine && !trimmedLine.startsWith('#')) {
+            const [username, password] = trimmedLine.split(':');
+            return { username, password: Buffer.from(password, 'base64').toString('utf-8') };
+        }
+        return null;
+    }).filter(user => user !== null);
 
     const isValidUser = validUsers.some(user => user.username === credentials.name && user.password === credentials.pass);
 
