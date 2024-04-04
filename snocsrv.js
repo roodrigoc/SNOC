@@ -23,6 +23,7 @@ const { exec } = require('child_process');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const rateLimit = require('express-rate-limit');
+const { decodeBase64 } = require('base64-arraybuffer');
 
 const app = express();
 const server = require('http').createServer(app);
@@ -52,7 +53,7 @@ function basicAuth(req, res, next) {
     const usersData = fs.readFileSync('users.conf', 'utf8').split('\n');
     const validUsers = usersData.map(line => {
         const [username, password] = line.trim().split(':');
-        return { username, password };
+        return { username, password: Buffer.from(password, 'base64').toString('utf-8') };
     });
 
     const isValidUser = validUsers.some(user => user.username === credentials.name && user.password === credentials.pass);
@@ -90,7 +91,7 @@ const transporter = nodemailer.createTransport({
     secure: parseInt(config['smtp-secure']), 
     auth: {
         user: config['smtp-user'],
-        pass: config['smtp-password'] 
+        pass: Buffer.from(config['smtp-password'], 'base64').toString('utf-8')
     },
     tls: {
         rejectUnauthorized: true 
