@@ -26,6 +26,7 @@ const rateLimit = require('express-rate-limit');
 const { decodeBase64 } = require('base64-arraybuffer');
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 const server = require('http').createServer(app);
 const wss = new WebSocket.Server({ server });
 
@@ -105,6 +106,40 @@ const transporter = nodemailer.createTransport({
 app.use(limiter);
 app.use(basicAuth);
 app.use(express.static('public'));
+
+
+const changePasswordLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: 5,
+    message: "Too many requests for password change, please try again later."
+});
+
+app.post('/change-password', changePasswordLimiter, (req, res) => {
+    const { username, currentPassword, newPassword } = req.body;
+    const usersData = fs.readFileSync('users.conf', 'utf8').split('\n');
+    let userFound = false;
+    const updatedUsersData = usersData.map(line => {
+        const trimmedLine = line.trim();
+        if (trimmedLine && !trimmedLine.startsWith('#')) {
+            const [existingUsername, password] = trimmedLine.split(':');
+            if (existingUsername === username) {
+                const decodedPassword = Buffer.from(password, 'base64').toString('utf-8');
+                if (decodedPassword === currentPassword) {
+                    userFound = true;
+                    const newEncodedPassword = Buffer.from(newPassword).toString('base64');
+                    return `${existingUsername}:${newEncodedPassword}`;
+                }
+            }
+        }
+        return line;
+    });
+    if (userFound) {
+        fs.writeFileSync('users.conf', updatedUsersData.join('\n'));
+        res.send('Password changed successfully.');
+    } else {
+        res.redirect('/change-password.html?error=invalid');
+    }
+});
 
 
 const accumulatedStatusTimes = {};
