@@ -3,9 +3,9 @@
 
 # Simple Network Operation Center (SNOC)
 
-## Project Description
-
 SNOC is a Node.js application designed for basic network monitoring and management tasks. It provides functionalities for monitoring device status via ping or HTTP GET requests, as well as monitoring shared network folders and retrieving information about the latest WAV or MP3 file in a specified directory. The project includes both server-side and client-side components for real-time monitoring and alerting.
+
+
 
 ## Server-Side Components
 
@@ -19,8 +19,57 @@ The server-side of the application, implemented in Node.js with Express.js and W
 - Logs connection information to a file with adjusted GMT-3 timezone.
 - Provides functionality for monitoring shared network folders and retrieving information about the latest WAV or MP3 file.
 
-### Configuration File (snoc.conf):
+### Email Configuration File (snoc.conf):
 - Contains SMTP and email configuration for sending email alerts. The password must be encrypted with the BASE64 algorithm (https://www.base64encode.org/).
+
+### users.conf
+
+The `users.conf` file is used to allow access via basic authentication. The file must contain passwords encrypted with the BASE64 algorithm 
+(https://www.base64encode.org/). Each line represents a user and follows the syntax:
+
+username:password
+
+Example:
+
+user01:MTIzYWJjNDU2
+
+### devices.conf
+
+The `devices.conf` file is used to configure the devices that will be monitored by SNOC. Each line represents a device and follows the syntax:
+
+`<Device Name>|<IP Address or URL>|<Protocol>|<Permission>|<Visibility>`
+
+- `<Device Name>`: Identifying name of the device.
+- `<IP Address or URL>`: IP address or URL of the device.
+- `<Protocol>`: Protocol to be used to check the device status (icmp for ping or web for HTTP GET).
+- `<Permission>`: Permission to receive email alerts (E to send email alerts, NE to not send).
+- `<Visibility>`: Show or hide the device on the home page.
+
+#### Email Groups: SNOC supports email groups. Use the permission field to specify which group a device belongs to. For example, devices with permission E1 will send email alerts to the recipients listed in the E1 group in `snoc.conf`.
+
+Example:
+
+ping-test|192.168.100.20|icmp|E1|show
+
+cam01|192.168.100.21|icmp|E3|hide
+
+Google|https://www.google.com/|web|NE|show
+
+WEB Server|http://192.168.100.12/|web|E2|show
+
+### access.log
+
+The `access.log` file records information about connections made to the SNOC server. It follows the standard log format and contains entries like:
+
+[Date and Time] Connection from "IP Address" (User: "username")
+
+Example:
+
+[2024-02-22T17:28:09.797] Connection from 192.168.100.5 (User: user01)
+
+[2024-03-25T23:01:56.613] Connection from 192.168.100.10 (User: user02)
+
+
 
 ## Client-Side Components
 
@@ -38,63 +87,6 @@ The client-side of the application, presented through a web interface served by 
 ### Change Password Page (change-password.html):
 - Allows users to change their passwords.
 - Requires input of username, current password, and new password.
-
-## Additional Files
-
-In addition to the previously mentioned files, the project also includes the following additional files:
-
-### devices.conf
-
-The `devices.conf` file is used to configure the devices that will be monitored by SNOC. Each line represents a device and follows the syntax:
-
-`<Device Name>|<IP Address or URL>|<Protocol>|<Permission>|<Visibility>`
-
-- `<Device Name>`: Identifying name of the device.
-- `<IP Address or URL>`: IP address or URL of the device.
-- `<Protocol>`: Protocol to be used to check the device status (icmp for ping or web for HTTP GET).
-- `<Permission>`: Permission to receive email alerts (E to send email alerts, NE to not send).
-- `<Visibility>`: Show or hide the device on the home page.
-
-#### Email Groups: SNOC supports email groups. Use the permission field to specify which group a device belongs to.
-#### For example, devices with permission E1 will send email alerts to the recipients listed in the E1 group in `snoc.conf`.
-
-Example:
-
-ping-test|192.168.100.20|icmp|E1|show
-
-cam01|192.168.100.21|icmp|E3|hide
-
-Google|https://www.google.com/|web|NE|show
-
-WEB Server|http://192.168.100.12/|web|E2|show
-
-
-
-### access.log
-
-The `access.log` file records information about connections made to the SNOC server. It follows the standard log format and contains entries like:
-
-[Date and Time] Connection from "IP Address" (User: "username")
-
-Example:
-
-[2024-02-22T17:28:09.797] Connection from 192.168.100.5 (User: user01)
-
-[2024-03-25T23:01:56.613] Connection from 192.168.100.10 (User: user02)
-
-
-
-### users.conf
-
-The `users.conf` file is used to allow access via basic authentication. The file must contain passwords encrypted with the BASE64 algorithm (https://www.base64encode.org/). Each line represents a user and
-follows the syntax:
-
-
-username:password
-
-Example:
-
-user01:MTIzYWJjNDU2
 
 
 
