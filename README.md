@@ -19,10 +19,10 @@ The server-side of the application, implemented in Node.js with Express.js and W
 - Logs connection information to a file with adjusted GMT-3 timezone.
 - Provides functionality for monitoring shared network folders and retrieving information about the latest WAV or MP3 file.
 
-### Email Configuration File (snoc.conf):
+### snoc.conf:
 - Contains SMTP and email configuration for sending email alerts. The password must be encrypted with the BASE64 algorithm (https://www.base64encode.org/).
 
-### users.conf
+### users.conf:
 
 The `users.conf` file is used to allow access via basic authentication. The file must contain passwords encrypted with the BASE64 algorithm 
 (https://www.base64encode.org/). Each line represents a user and follows the syntax:
@@ -33,7 +33,7 @@ Example:
 
 user01:MTIzYWJjNDU2
 
-### devices.conf
+### devices.conf:
 
 The `devices.conf` file is used to configure the devices that will be monitored by SNOC. Each line represents a device and follows the syntax:
 
@@ -57,7 +57,7 @@ Google|https://www.google.com/|web|NE|show
 
 WEB Server|http://192.168.100.12/|web|E2|show
 
-### access.log
+### access.log:
 
 The `access.log` file records information about connections made to the SNOC server. It follows the standard log format and contains entries like:
 
