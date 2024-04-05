@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 const server = require('http').createServer(app);
 const wss = new WebSocket.Server({ server });
 
-const changePassword = require('./changePassword'); // Importando a função de alteração de senha
+const changePassword = require('./changePassword');
 
 const auth = require('basic-auth');
 
