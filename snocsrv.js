@@ -30,6 +30,8 @@ app.use(express.urlencoded({ extended: true }));
 const server = require('http').createServer(app);
 const wss = new WebSocket.Server({ server });
 
+const changePassword = require('./changePassword'); // Importando a função de alteração de senha
+
 const auth = require('basic-auth');
 
 //Rate limiting prevents the same IP address from making too many requests that will help us prevent attacks like brute force
@@ -367,6 +369,8 @@ const caminhoDevicesJS = path.join(__dirname, 'devices.js');
 app.get('/devices.js', (req, res) => {
     res.sendFile(caminhoDevicesJS);
 });
+
+app.post('/change-password', changePassword.changePassword);
 
 server.listen(3000, () => {
     console.log('Server started at: http://localhost:3000');
