@@ -35,6 +35,10 @@ The client-side of the application, presented through a web interface served by 
 ### Styling (main.css):
 - Provides styling for the HTML interface, distinguishing between online and offline devices.
 
+### Change Password Page (change-password.html):
+- Allows users to change their passwords.
+- Requires input of username, current password, and new password.
+
 ## Additional Files
 
 In addition to the previously mentioned files, the project also includes the following additional files:
