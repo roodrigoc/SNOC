@@ -92,7 +92,7 @@ The client-side of the application, presented through a web interface served by 
 - Provides styling for the HTML interface, distinguishing between online and offline devices.
 
 ### Change Password Page (change-password.html):
-- Allows users to change their passwords.
+- Allows users to change their passwords. New users have the default password "123456". See "adduser.py".
 - Requires input of username, current password, and new password.
 
 
