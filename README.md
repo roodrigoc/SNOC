@@ -36,6 +36,10 @@ user01:MTIzYWJjNDU2
 
 - Provides a simple command-line interface for adding users to `users.conf` file. Created users have the default password "123456".
 
+### userdel.py
+
+- Provides a simple command line interface to remove users from the `users.conf` file.
+
 ### devices.conf:
 
 The `devices.conf` file is used to configure the devices that will be monitored by SNOC. Each line represents a device and follows the syntax:
