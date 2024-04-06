@@ -24,14 +24,17 @@ The server-side of the application, implemented in Node.js with Express.js and W
 
 ### users.conf:
 
-The `users.conf` file is used to allow access via basic authentication. The file must contain passwords encrypted with the BASE64 algorithm 
-(https://www.base64encode.org/). Each line represents a user and follows the syntax:
+The `users.conf` file is used to allow access via basic authentication. The file must contain passwords encrypted with the BASE64 algorithm. Each line represents a user and follows the syntax:
 
 username:password
 
 Example:
 
 user01:MTIzYWJjNDU2
+
+### adduser.py
+
+- Provides a simple command-line interface for adding users to `users.conf` file.
 
 ### devices.conf:
 
