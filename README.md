@@ -34,7 +34,7 @@ user01:MTIzYWJjNDU2
 
 ### adduser.py
 
-- Provides a simple command-line interface for adding users to `users.conf` file.
+- Provides a simple command-line interface for adding users to `users.conf` file. Created users have the default password "123456".
 
 ### devices.conf:
 
