@@ -32,13 +32,19 @@ Example:
 
 user01:MTIzYWJjNDU2
 
-### adduser.py
+### adduser.py:
 
 - Provides a simple command-line interface for adding users to `users.conf` file. Created users have the default password "123456".
 
-### userdel.py
+![adduser](https://github.com/roodrigoc/SNOC/assets/52783418/1d9468be-a280-46d3-ac16-59b7c6344b56)
+
+
+### userdel.py:
 
 - Provides a simple command line interface to remove users from the `users.conf` file.
+
+![userdel](https://github.com/roodrigoc/SNOC/assets/52783418/da478134-94f6-45d8-802b-baa99622f113)
+
 
 ### devices.conf:
 
@@ -95,6 +101,7 @@ The client-side of the application, presented through a web interface served by 
 - Allows users to change their passwords. New users have the default password "123456". See "adduser.py".
 - Requires input of username, current password, and new password.
 
+![change-passwd](https://github.com/roodrigoc/SNOC/assets/52783418/8b698de3-a70a-409f-b522-127a944fd422)
 
 
 ## Getting Started
