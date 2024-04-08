@@ -43,6 +43,4 @@ function changePassword(req, res) {
     }
 }
 
-module.exports = {
-    changePassword
-};
+module.exports = changePassword;
