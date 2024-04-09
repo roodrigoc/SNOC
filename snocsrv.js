@@ -42,6 +42,12 @@ const limiter = rateLimit({
 	
 });
 
+const changePasswordLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000,
+    max: 10,
+    message: "Too many requests for password change, please try again in 1 hour."
+});
+
 function basicAuth(req, res, next) {
     const credentials = auth(req);
 
@@ -108,13 +114,6 @@ const transporter = nodemailer.createTransport({
 app.use(limiter);
 app.use(basicAuth);
 app.use(express.static('public'));
-
-
-const changePasswordLimiter = rateLimit({
-    windowMs: 60 * 60 * 1000, // 1 hour
-    max: 5,
-    message: "Too many requests for password change, please try again later."
-});
 
 const accumulatedStatusTimes = {};
 
