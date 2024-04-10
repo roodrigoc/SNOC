@@ -17,7 +17,7 @@ along with this program; see the file COPYING. If not, see
 const fs = require('fs');
 
 function changePassword(req, res) {
-    const { username, currentPassword, newPassword } = req.body;
+    const { username, currentPassword, newPassword, confirmPassword } = req.body;
     const usersData = fs.readFileSync('users.conf', 'utf8').split('\n');
     let userFound = false;
     const updatedUsersData = usersData.map(line => {
@@ -26,7 +26,7 @@ function changePassword(req, res) {
             const [existingUsername, password] = trimmedLine.split(':');
             if (existingUsername === username) {
                 const decodedPassword = Buffer.from(password, 'base64').toString('utf-8');
-                if (decodedPassword === currentPassword) {
+                if (decodedPassword === currentPassword && newPassword === confirmPassword && newPassword !== username && newPassword !== currentPassword && newPassword.length >= 6) {
                     userFound = true;
                     const newEncodedPassword = Buffer.from(newPassword).toString('base64');
                     return `${existingUsername}:${newEncodedPassword}`;
