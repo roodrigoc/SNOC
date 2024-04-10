@@ -99,7 +99,7 @@ The client-side of the application, presented through a web interface served by 
 
 ### Change Password Page (change-password.html):
 - Allows users to change their passwords. New users have the default password "123456". See "adduser.py".
-- Requires input of username, current password, confirm password, and new password.
+- Requires input of username, current password, new password, and confirm password.
 
 ![change-passwd](https://github.com/roodrigoc/SNOC/assets/52783418/1330ac07-e05b-49f1-ac2d-8472ec2c8682)
 
