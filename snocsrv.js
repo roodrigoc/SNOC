@@ -343,6 +343,10 @@ app.get('/devices.js', (req, res) => {
 
 app.post('/change-password', changePasswordLimiter, changePassword);
 
+app.get('/validateForm.js', (req, res) => {
+    res.sendFile(__dirname + '/validateForm.js');
+});
+
 server.listen(3000, () => {
     console.log('Server started at: http://localhost:3000');
 });
