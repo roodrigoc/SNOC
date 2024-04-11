@@ -106,6 +106,8 @@ const transporter = nodemailer.createTransport({
         user: config['smtp-user'],
         pass: Buffer.from(config['smtp-password'], 'base64').toString('utf-8')
     },
+    logger: true,
+    transactionLog: true, 
     tls: {
         rejectUnauthorized: true 
     }
