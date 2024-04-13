@@ -37,14 +37,16 @@ user01:MTIzYWJjNDU2
 
 - Provides a simple command-line interface for adding users to `users.conf` file. Created users have the default password "123456".
 
-![adduser](https://github.com/roodrigoc/SNOC/assets/52783418/1d9468be-a280-46d3-ac16-59b7c6344b56)
+![adduser](https://github.com/roodrigoc/SNOC/assets/52783418/bac1f43f-37da-44ce-8915-eafb1b3ec9d4)
+
 
 
 ### userdel.py:
 
 - Provides a simple command line interface to remove users from the `users.conf` file.
 
-![userdel](https://github.com/roodrigoc/SNOC/assets/52783418/da478134-94f6-45d8-802b-baa99622f113)
+![userdel](https://github.com/roodrigoc/SNOC/assets/52783418/8acb4b11-16f1-49c2-b1da-48b6bb1aa6c7)
+
 
 
 ### devices.conf:
