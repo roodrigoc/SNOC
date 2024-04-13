@@ -29,8 +29,9 @@ The `users.conf` file is used to allow access via basic authentication. The file
 username:password
 
 Example:
-
+```
 user01:MTIzYWJjNDU2
+```
 
 ### adduser.py:
 
@@ -61,7 +62,7 @@ The `devices.conf` file is used to configure the devices that will be monitored 
 #### Email Groups: SNOC supports email groups. Use the permission field to specify which group a device belongs to. For example, devices with permission E1 will send email alerts to the recipients listed in the E1 group in `snoc.conf`.
 
 Example:
-
+```
 ping-test|192.168.100.20|icmp|E1|show
 
 cam01|192.168.100.21|icmp|E3|hide
@@ -69,6 +70,7 @@ cam01|192.168.100.21|icmp|E3|hide
 Google|https://www.google.com/|web|NE|show
 
 WEB Server|http://192.168.100.12/|web|E2|show
+```
 
 ### access.log:
 
@@ -77,11 +79,11 @@ The `access.log` file records information about connections made to the SNOC ser
 [Date and Time] Connection from "IP Address" (User: "username")
 
 Example:
-
+```
 [2024-02-22T17:28:09.797] Connection from 192.168.100.5 (User: user01)
 
 [2024-03-25T23:01:56.613] Connection from 192.168.100.10 (User: user02)
-
+```
 
 
 ## Client-Side Components
